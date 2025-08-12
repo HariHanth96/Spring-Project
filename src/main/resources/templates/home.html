@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyWebsite | Home</title>
+  <link rel="stylesheet" th:href="@{css/home.css}" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1 class="logo">MyWebsite</h1>
+      <ul class="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <span sec:authorize="!isAuthenticated()">	<!-- if we are already logged in, these should not be displayed -->
+        <li><a href="/register">Register</a></li>
+        </span>
+        <span sec:authorize="!isAuthenticated()">
+        <li><a href="/login">Login</a></li>
+        </span>
+        <span sec:authorize="isAuthenticated()">	<!-- if we are logged in, these should be displayed -->
+        <li><a href="/profile">Profile</a></li>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+        <li><a href="/logout">LogOut</a></li>
+        </span>
+        <span sec:authorize="hasRole('ROLE_ADMIN')">
+        <li><a href="/admin">Admin</a></li>
+        </span>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to MyWebsite</h2>
+      <p>Building digital experiences that make a difference.</p>
+      <a href="/about" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature" th:each="post: ${posts}"> <!--  Thymeleaf notation -->
+      <h3 th:text="${post.title}"></h3>
+      <p th:text="${post.body}"></p>
+    </div>
+   <!--  <div class="feature">
+      <h3>Responsive Design</h3>
+      <p>Seamlessly adapts to mobile, tablet, and desktop screens.</p>
+    </div>
+    <div class="feature">
+      <h3>Modern Stack</h3>
+      <p>Built using the latest technologies and best practices.</p>
+    </div> -->
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

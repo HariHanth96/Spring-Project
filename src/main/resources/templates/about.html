@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" th:href="@{css/about.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1 class="logo">MyWebsite</h1>
+            <ul class="nav-links">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+		        <span sec:authorize="!isAuthenticated()">	<!-- if we are already logged in, these should not be displayed -->
+		        <li><a href="/register">Register</a></li>
+		        </span>
+		        <span sec:authorize="!isAuthenticated()">
+		        <li><a href="/login">Login</a></li>
+		        </span>
+		        <span sec:authorize="isAuthenticated()">	<!-- if we are logged in, these should be displayed -->
+		        <li><a href="/profile">Profile</a></li>
+		        </span>
+		        <span sec:authorize="isAuthenticated()">
+		        <li><a href="/logout">LogOut</a></li>
+		        </span>
+		        <span sec:authorize="hasRole('ROLE_ADMIN')">
+        		<li><a href="/admin">Admin</a></li>
+        		</span>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>
+                Welcome to MyWebsite! We are passionate about delivering quality content and digital experiences that empower and inspire.
+            </p>
+
+            <div class="team">
+                <div class="team-member">
+                    <img src="images/gun.png" alt="Team Member">
+                    <h3>Jane Doe</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/gun.png" alt="Team Member">
+                    <h3>John Smith</h3>
+                    <p>Lead Developer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+    </footer>
+</body>
+</html>
